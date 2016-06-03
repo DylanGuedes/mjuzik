@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Hello</h1>
-  <button class="btn btn-info">Hi</button>
+  <ul class="genres-list list-group">
+    {% for genre in genres %}
+    <li class="list-group-item">
+      <p>
+        <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
+      </p>
+    </li>
+    {% endfor %}
+
+    <ul class="users-list list-group">
+      {% for user in users %}
+        <li class="list-group-item">
+          {{ user.username }}
+        </li>
+      {% endfor %}
+    </ul>
+  </ul>
+  <a class="btn btn-info" href="{% url 'genres.new' %}">New Genre</a>
 {% endblock content %}
