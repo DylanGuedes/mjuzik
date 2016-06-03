@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap3',
+    'mjuzik.genres',
+    'mjuzik.recommendations',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

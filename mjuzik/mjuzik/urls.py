@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from mjuzik.genres import views as genre_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^genres/', genre_views.index, name='genres.index'),
 ]
