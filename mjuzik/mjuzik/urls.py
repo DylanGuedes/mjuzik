@@ -24,6 +24,9 @@ urlpatterns = [
     url(r'^genres/$', genre_views.index, name='genres.index'),
     url(r'^genres/new/$', genre_views.new_genre, name='genres.new'),
     url(r'^genres/(?P<id>\d+)/$', genre_views.genre_detail, name='genres.show'),
-    url(r'^login/$', auth_views.login, {'template_name': 'authentication/signin.html'}, name='login'),
+    url(r'^login/$', authentication_views.signin, name='login'),
     url(r'^signup/$', authentication_views.signup, name='signup'),
+    url(r'^signout/$', authentication_views.signout, name='signout'),
+    url(r'^accounts/profile/$', authentication_views.profile, name='profile'),
+    url(r'^$', authentication_views.profile, name='home'),
 ]
