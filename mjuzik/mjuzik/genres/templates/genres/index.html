@@ -5,18 +5,25 @@
     {% for genre in genres %}
     <li class="list-group-item">
       <p>
-        <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
+        <div class="row">
+          <div class="col-md-10">
+            <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
+          </div>
+          <div class="col-md-2">
+            {% if request.user.is_authenticated %}
+              {% if request.user.profile %}
+                {% if genre in request.user.profile.following_genres.all %}
+                  <a href="{% url 'genres.unfollow_genre' genre_id=genre.id %}">Unfollow!</a>
+                {% else %}
+                  <a href="{% url 'genres.follow_genre' genre_id=genre.id %}">Follow!</a>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
       </p>
     </li>
     {% endfor %}
-
-    <ul class="users-list list-group">
-      {% for user in users %}
-        <li class="list-group-item">
-          {{ user.username }}
-        </li>
-      {% endfor %}
-    </ul>
   </ul>
   <a class="btn btn-info" href="{% url 'genres.new' %}">New Genre</a>
 {% endblock content %}

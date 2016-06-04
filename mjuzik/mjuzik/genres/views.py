@@ -26,3 +26,19 @@ def genre_detail(request, id):
     genre = Genre.objects.get(pk=id)
     users = User.objects.all()
     return render(request, 'genres/show.html', {'genre': genre, 'users': users})
+
+@login_required(login_url='/login')
+def follow_genre(request, genre_id):
+    genre = Genre.objects.get(id=genre_id)
+    request.user.profile.following_genres.add(genre)
+    request.user.profile.save()
+    genre.save()
+    return redirect('genres.index')
+
+@login_required(login_url='/login')
+def unfollow_genre(request, genre_id):
+    genre = Genre.objects.get(id=genre_id)
+    request.user.profile.following_genres.remove(genre)
+    request.user.profile.save()
+    genre.save()
+    return redirect('genres.index')

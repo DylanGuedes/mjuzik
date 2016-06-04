@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm
 from django.contrib.auth.decorators import login_required
+from mjuzik.authentication.models import Profile
 
 def signin(request):
     if request.POST:
@@ -34,7 +35,9 @@ def signup(request):
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
             user.password = request.POST['password']
-            User.objects.create_user(username=user.username, password=user.password, email=user.email)
+            c = User.objects.create_user(username=user.username, password=user.password, email=user.email)
+            Profile(user=c).save()
+
             return redirect('genres.index')
 
     return render(request, 'authentication/signup.html')

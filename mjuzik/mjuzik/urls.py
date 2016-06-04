@@ -20,6 +20,8 @@ from mjuzik.genres import views as genre_views
 from mjuzik.authentication import views as authentication_views
 
 urlpatterns = [
+    url(r'^follow_genre/(?P<genre_id>\d+)$', genre_views.follow_genre, name='genres.follow_genre'),
+    url(r'^unfollow_genre/(?P<genre_id>\d+)$', genre_views.unfollow_genre, name='genres.unfollow_genre'),
     url(r'^admin/', admin.site.urls),
     url(r'^genres/$', genre_views.index, name='genres.index'),
     url(r'^genres/new/$', genre_views.new_genre, name='genres.new'),
