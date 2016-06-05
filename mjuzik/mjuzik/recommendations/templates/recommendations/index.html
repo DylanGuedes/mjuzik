@@ -26,7 +26,7 @@
             {{ recommendation.created_by.user }}
           </div>
           <div class="col-sm-8">
-            {{ recommendation.description.rendered}}
+            <p>{{ recommendation.description.rendered}}</p>
           </div>
           <div class="col-sm-1 float-right">
             {% if request.user.profile == recommendation.created_by %}
