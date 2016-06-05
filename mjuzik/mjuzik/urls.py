@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from mjuzik.genres import views as genre_views
 from mjuzik.authentication import views as authentication_views
+from mjuzik.recommendations import views as recommendation_views
 
 urlpatterns = [
     url(r'^follow_genre/(?P<genre_id>\d+)$', genre_views.follow_genre, name='genres.follow_genre'),
     url(r'^unfollow_genre/(?P<genre_id>\d+)$', genre_views.unfollow_genre, name='genres.unfollow_genre'),
+    url(r'^recommendations/$', recommendation_views.index, name='recommendations.index'),
+    url(r'^recommendations/new/$', recommendation_views.new_recommendation, name='recommendations.new'),
     url(r'^admin/', admin.site.urls),
     url(r'^genres/$', genre_views.index, name='genres.index'),
     url(r'^genres/new/$', genre_views.new_genre, name='genres.new'),
@@ -31,4 +34,5 @@ urlpatterns = [
     url(r'^signout/$', authentication_views.signout, name='signout'),
     url(r'^accounts/profile/$', authentication_views.profile, name='profile'),
     url(r'^$', authentication_views.profile, name='home'),
+    url('^markdown/', include('django_markdown.urls')),
 ]

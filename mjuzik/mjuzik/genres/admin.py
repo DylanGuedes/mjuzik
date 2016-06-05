@@ -1,3 +1,8 @@
 from django.contrib import admin
+from mjuzik.recommendations.models import Recommendation
 
-# Register your models here.
+class RecommendationAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Recommendation, RecommendationAdmin)
+

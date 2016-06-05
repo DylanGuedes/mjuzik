@@ -1,0 +1,8 @@
+.genre-name {
+  text-align: right;
+}
+
+.genre-name a {
+  color: white;
+  text-transform: uppercase;
+}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load markup_tags %}
+
+{% block content %}
+  <h1>Recommendations</h1>
+  {% for recommendation in recommendations %}
+    <div class="recommendation-detail panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ recommendation.title }}</h3>
+        <div class="genre-name">
+          <a href="{% url 'genres.index' %}">{{ recommendation.genre.name }}</a>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">
+            {{ recommendation.created_by.user }}
+          </div>
+          <div class="col-md-9">
+            {{ recommendation.description | apply_markup:"markdown" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <a href="{% url 'recommendations.new' %}" class="btn btn-info">New Recommendation</a>
+{% endblock %}

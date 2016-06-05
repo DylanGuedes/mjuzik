@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Hi</h1>
-<h1> id: {{ genre.name }} </h1>
-  {% for user in users %}
-    <p>{{user.username}}</p>
-  {% endfor %}
+  <div class="container jumbotron">
+    <h1>{{genre.name}}</h1>
+  </div>
+
+  {% if genre.recommendation_set %}
+    <h2>Recommendations</h2>
+    {% for recommendation in genre.recommendation_set.all %}
+      {{ recommendation.title }}
+    {% endfor %}
+  {% endif %}
 {% endblock %}
