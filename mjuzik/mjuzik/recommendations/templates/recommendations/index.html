@@ -1,30 +1,37 @@
 {% extends 'base.html' %}
 {% load markup_tags %}
-{% load parse_content_bbcode %}
 {% load fontawesome %}
 {% fontawesome_stylesheet %}
+{% load bbcode_tags %}
 
 {% block content %}
   <h1>Recommendations</h1>
   {% for recommendation in recommendations %}
     <div class="recommendation-detail panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">{{ recommendation.title }} - ({{ recommendation.likes }} likes)</h3>
-        <div class="genre-name"><a href="{% url 'genres.show' id=recommendation.genre.id %}">{{ recommendation.genre.name }}</a></div>
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="panel-title">{{ recommendation.title }} - ({{ recommendation.likes }} likes)</h3>
+          </div>
+          <div class="col-md-6">
+            {% for genre in recommendation.genres.all %}
+              <a href="{% url 'genres.show' id=genre.id %}" class="genre-name .float-right">{{ genre.name }}</a> -
+            {% endfor %}
+          </div>
+        </div>
       </div>
-
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">
             {{ recommendation.created_by.user }}
           </div>
           <div class="col-sm-8">
-            {{ recommendation.description |parse_content_bbcode|safe }}
+            {{ recommendation.description.rendered}}
           </div>
           <div class="col-sm-1 float-right">
             {% if request.user.profile == recommendation.created_by %}
               <center>
-                <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="{% url 'recommendations.destroy' recommendation_id=recommendation.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
               </center>
             {% else %}
               <center>

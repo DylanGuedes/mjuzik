@@ -15,9 +15,9 @@ def new_genre(request):
         form = GenreForm(request.POST)
         if form.is_valid():
             genre = form.save(commit=False)
+            genre.created_by = request.user.profile
             genre.save()
         return redirect('genres.index')
-
     else:
         form = GenreForm()
         return render(request, 'genres/new.html', { 'form': form } )
@@ -41,4 +41,11 @@ def unfollow_genre(request, genre_id):
     request.user.profile.following_genres.remove(genre)
     request.user.profile.save()
     genre.save()
+    return redirect('genres.index')
+
+@login_required(login_url='/login')
+def destroy(request, genre_id):
+    genre = Genre.objects.get(id=genre_id)
+    if genre.created_by == request.user.profile:
+        genre.delete()
     return redirect('genres.index')

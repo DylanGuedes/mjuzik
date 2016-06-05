@@ -9,7 +9,13 @@
           <div class="col-md-10">
             <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
+            {% if genre.created_by == request.user.profile %}
+            <a href="{% url 'genres.destroy' genre_id=genre.id %}" class="glyphicon glyphicon-remove btn btn-danger"></a>
+            {% endif %}
+          </div>
+
+          <div class="col-md-1">
             {% if request.user.is_authenticated %}
               {% if request.user.profile %}
                 {% if genre in request.user.profile.following_genres.all %}
