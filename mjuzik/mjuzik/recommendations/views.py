@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 def index(request):
     genres_ids = request.user.profile.following_genres.all().values_list('id', flat=True)
-    recommendations = Recommendation.objects.filter(genres__in=genres_ids)
+    recommendations = Recommendation.objects.filter(genres__in=genres_ids).order_by('-created_at')
     context = {'recommendations':recommendations}
     return render(request, 'recommendations/index.html', context)
 
@@ -50,4 +50,17 @@ def destroy(request, recommendation_id):
     if request.user.profile == recommendation.created_by:
         recommendation.delete()
     return redirect('recommendations.index')
+
+@login_required(login_url='/login')
+def edit_recommendation(request, recommendation_id):
+    recommendation = Recommendation.objects.get(id=recommendation_id)
+    if request.user.profile == recommendation.created_by:
+        return render(request, 'recommendations/edit.html')
+    return redirect('recommendations.index')
+
+@login_required(login_url='/login')
+def recommendation_detail(request, recommendation_id):
+    recommendation = Recommendation.objects.get(id=recommendation_id)
+    context = { 'recommendation':recommendation }
+    return render(request, 'recommendations/show.html', context=context)
 

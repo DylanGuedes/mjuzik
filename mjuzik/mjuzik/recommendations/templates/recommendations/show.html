@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% load bbcode_tags %}
+
+{% block content %}
+  {% include 'recommendations/_recommendation.html' with recommendation=recommendation %}
+{% endblock %}

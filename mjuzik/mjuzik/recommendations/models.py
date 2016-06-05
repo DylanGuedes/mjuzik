@@ -11,6 +11,7 @@ class Recommendation(models.Model):
     description = BBCodeTextField(max_length=200)
     genres = models.ManyToManyField(Genre, related_name='recommendations')
     likes = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
     liked_by = models.ManyToManyField(Profile, related_name='liked_recommendations')
     def __str__(self):
         return self.title

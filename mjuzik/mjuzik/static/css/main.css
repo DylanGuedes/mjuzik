@@ -28,3 +28,23 @@ a.genre-name {
 .margin-bottom-40 {
   margin-bottom: 40px;
 }
+
+.display-inline {
+  display: inline;
+}
+
+.margin-right-15 {
+  margin-right: 15px;
+}
+
+.margin-left-15 {
+  margin-left: 15px;
+}
+
+.margin-right-0 {
+  margin-right: 0px;
+}
+
+.margin-left-0 {
+  margin-left: 0px;
+}

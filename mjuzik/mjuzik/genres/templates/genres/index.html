@@ -6,12 +6,17 @@
     <li class="list-group-item">
       <p>
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-9">
             <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
           </div>
+
+          <div class="col-md-1">
+            <span class="badge">{{genre.recommendations.count}} recommendations</span>
+          </div>
+
           <div class="col-md-1">
             {% if genre.created_by == request.user.profile %}
-            <a href="{% url 'genres.destroy' genre_id=genre.id %}" class="glyphicon glyphicon-remove btn btn-danger"></a>
+              <a href="{% url 'genres.destroy' genre_id=genre.id %}" class="glyphicon glyphicon-remove btn btn-danger"></a>
             {% endif %}
           </div>
 

@@ -2,22 +2,5 @@
 {% load bbcode_tags %}
 
 {% block content %}
-  <div class="container jumbotron">
-    <h1>{{genre.name}}</h1>
-    <p>{{genre.description}}</p>
-  </div>
-
-  {% if genre.recommendations %}
-    <h2 class="text-align-center">Recommendations</h2>
-    {% for recommendation in genre.recommendations.all %}
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <p class="panel-title">{{ recommendation.title }}</p>
-        </div>
-        <div class="panel-body">
-          <p>{{recommendation.description.rendered}}</p>
-        </div>
-      </div>
-    {% endfor %}
-  {% endif %}
+  {% include 'genres/_genre.html' with genre=genre %}
 {% endblock %}

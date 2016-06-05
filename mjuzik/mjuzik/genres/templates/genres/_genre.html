@@ -1,0 +1,16 @@
+<div class="genre-template">
+  <div class="container jumbotron">
+    <h1>{{genre.name}}</h1>
+    <p>{{genre.description}}</p>
+    <small>{{ genre.recommendations.count }} recommendation(s)...</small>
+
+    {% if genre.recommendations.count != 0 %}
+      <h2>Recommendations</h2>
+      {% for recommendation in genre.recommendations.all %}
+        {% include 'recommendations/_recommendation.html' with recommendation=recommendation %}
+      {% endfor %}
+    {% else %}
+      <h4>Looks like this genre doesn't have any recommendations at this moment. <a href="{% url 'recommendations.new' %}">Be the first!</a>
+    {% endif %}
+  </div>
+</div>

@@ -5,47 +5,9 @@
 {% load bbcode_tags %}
 
 {% block content %}
-  <h1>Recommendations</h1>
+  <h1>Latest recommendations for you:</h1>
   {% for recommendation in recommendations %}
-    <div class="recommendation-detail panel panel-primary">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="panel-title">{{ recommendation.title }} - ({{ recommendation.likes }} likes)</h3>
-          </div>
-          <div class="col-md-6">
-            {% for genre in recommendation.genres.all %}
-              <a href="{% url 'genres.show' id=genre.id %}" class="genre-name .float-right">{{ genre.name }}</a> -
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-2">
-            {{ recommendation.created_by.user }}
-          </div>
-          <div class="col-sm-8">
-            <p>{{ recommendation.description.rendered}}</p>
-          </div>
-          <div class="col-sm-1 float-right">
-            {% if request.user.profile == recommendation.created_by %}
-              <center>
-                <a href="{% url 'recommendations.destroy' recommendation_id=recommendation.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
-              </center>
-            {% else %}
-              <center>
-                {% if request.user.profile in recommendation.liked_by.all %}
-                  <a href="{% url 'recommendations.downvote' recommendation_id=recommendation.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span></a>
-                {% else %}
-                  <a href="{% url 'recommendations.upvote' recommendation_id=recommendation.id %}" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></a>
-                {% endif %}
-              </center>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include 'recommendations/_recommendation.html' with recommendation=recommendation %}
   {% endfor %}
 
   <a href="{% url 'recommendations.new' %}" class="btn btn-info">New Recommendation</a>
