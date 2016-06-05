@@ -31,3 +31,25 @@ def new_recommendation(request):
         return render(request, 'recommendations/new.html', { 'form': form } )
 
 
+@login_required(login_url='/login')
+def upvote(request, recommendation_id):
+    recommendation = Recommendation.objects.get(id=recommendation_id)
+    recommendation.likes += 1
+    recommendation.liked_by.add(request.user.profile)
+    print("antes do save")
+    recommendation.save()
+    print("lista:")
+    print(recommendation.liked_by)
+    print("apos o save")
+    return redirect('recommendations.index')
+
+@login_required(login_url='/login')
+def downvote(request, recommendation_id):
+    recommendation = Recommendation.objects.get(id=recommendation_id)
+    recommendation.likes -= 1
+    recommendation.liked_by.remove(request.user.profile)
+    print("antes do save")
+    recommendation.save()
+    print("apos o save")
+    return redirect('recommendations.index')
+

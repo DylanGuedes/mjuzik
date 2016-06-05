@@ -31,8 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'content_bbcode',
     'bootstrap',
     'fontawesome',
+    'precise_bbcode',
     'mjuzik.genres',
     'mjuzik.recommendations',
     'mjuzik.authentication',

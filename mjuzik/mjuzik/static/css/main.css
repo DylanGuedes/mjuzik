@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'fledgling-sb';
+  src: url('../fonts/fledgling-sb.ttf');
+  src: local('../fonts/fledgling-sb.ttf'),
+}
+
+h3.panel-title {
+  font-size: 20px;
+}
+
+div .genre-name {
+  font-size: 25px;
+  font-family: 'fledgling-sb';
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.float-right {
+  float: right;
+}

@@ -23,6 +23,8 @@ from mjuzik.recommendations import views as recommendation_views
 urlpatterns = [
     url(r'^follow_genre/(?P<genre_id>\d+)$', genre_views.follow_genre, name='genres.follow_genre'),
     url(r'^unfollow_genre/(?P<genre_id>\d+)$', genre_views.unfollow_genre, name='genres.unfollow_genre'),
+    url(r'^recommendations/upvote/(?P<recommendation_id>\d+)$', recommendation_views.upvote, name='recommendations.upvote'),
+    url(r'^recommendations/downvote/(?P<recommendation_id>\d+)$', recommendation_views.downvote, name='recommendations.downvote'),
     url(r'^recommendations/$', recommendation_views.index, name='recommendations.index'),
     url(r'^recommendations/new/$', recommendation_views.new_recommendation, name='recommendations.new'),
     url(r'^admin/', admin.site.urls),
