@@ -15,7 +15,6 @@ def index(request):
 def new_recommendation(request):
     if request.method == 'POST':
         form = RecommendationForm(request.POST)
-        print(form)
         if form.is_valid():
             recommendation = form.save(commit=False)
             recommendation.created_by = request.user.profile
