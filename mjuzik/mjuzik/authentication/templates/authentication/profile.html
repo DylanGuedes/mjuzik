@@ -2,6 +2,7 @@
 
 {% block content %}
   <div class="container jumbotron">
-    <h1>Welcome!</h1>
+    <h1>Welcome, {{request.user.username}}.</h1>
+    <p><a href="{% url 'recommendations.index' %}">Recommendations for you..</a></p>
   </div>
 {% endblock %}

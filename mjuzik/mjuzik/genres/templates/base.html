@@ -6,6 +6,7 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link href="{% static 'css/recommendations.css' %}" rel="stylesheet">
+    <link href="{% static 'css/genres.css' %}" rel="stylesheet">
     {# <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script> #}
     {# <script src="{% static 'js/bootstrap.min.js' %}"></script> #}
     <title>Mjuzik</title>
@@ -13,6 +14,7 @@
   <body>
     <nav class="navbar navbar-default">
       <ul class="nav navbar-nav">
+        <li><a href="{% url 'home' %}">Home</a></li>
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'genres.index' %}">Genres</a></li>
           <li><a href="{% url 'recommendations.index' %}">Recommendations</a></li>

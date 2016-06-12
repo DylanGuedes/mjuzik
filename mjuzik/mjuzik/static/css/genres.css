@@ -1,0 +1,42 @@
+.btn.btn-info {
+  color: #676767;
+  background-color: white;
+  border-radius: 0px;
+  border-color: #676767;
+  font-size: 12px;
+}
+
+.btn.btn-info:hover {
+  color: white;
+  background-color: #676767;
+}
+
+.genres-list.list-group a.genre-name {
+  color: #676767;
+}
+
+a.follow-genre {
+  color: red;
+}
+
+a.unfollow-genre {
+  color: #676767;
+}
+
+.list-group-item.followed-genre {
+  background-color: #676767;
+}
+
+.list-group-item.followed-genre a.genre-name {
+  color: white;
+}
+
+.list-group-item.followed-genre a.unfollow-genre {
+  color: white;
+  font-weight: 900;
+}
+
+.list-group-item.non-followed-genre a.follow-genre {
+  color: #676767;
+  font-weight: 900;
+}

@@ -48,3 +48,11 @@ a.genre-name {
 .margin-left-0 {
   margin-left: 0px;
 }
+
+.font-fledgling-sb {
+  font-family: 'fledgling-sb';
+}
+
+.welcome-page.jumbotron h1{
+  font-size: 150px;
+}

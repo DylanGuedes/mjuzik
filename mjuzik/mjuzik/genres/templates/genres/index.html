@@ -3,38 +3,38 @@
 {% block content %}
   <ul class="genres-list list-group">
     {% for genre in genres %}
-    <li class="list-group-item">
-      <p>
-        <div class="row">
-          <div class="col-md-9">
-            <a href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
-          </div>
+      {% if request.user.is_authenticated and request.user.profile and genre in request.user.profile.following_genres.all %}
+        <li class="list-group-item followed-genre">
+          <div class="row">
+            <div class="col-md-8">
+              <a class="genre-name" href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
+            </div>
+            <div class="col-md-2">
+              <span class="badge">{{genre.recommendations.count}} recommendations</span>
+            </div>
 
-          <div class="col-md-1">
-            <span class="badge">{{genre.recommendations.count}} recommendations</span>
+            <div class="col-md-2">
+              <a class="unfollow-genre" href="{% url 'genres.unfollow_genre' genre_id=genre.id %}">UNFOLLOW</a>
+            </div>
           </div>
+        </li>
+      {% else %}
+        <li class="list-group-item non-followed-genre">
+          <div class="row">
+            <div class="col-md-8">
+              <a class="genre-name" href="{% url 'genres.show' id=genre.id %}">{{ genre.name }}</a>
+            </div>
+            <div class="col-md-2">
+              <span class="badge">{{genre.recommendations.count}} recommendations</span>
+            </div>
 
-          <div class="col-md-1">
-            {% if genre.created_by == request.user.profile %}
-              <a href="{% url 'genres.destroy' genre_id=genre.id %}" class="glyphicon glyphicon-remove btn btn-danger"></a>
-            {% endif %}
+            <div class="col-md-2">
+              <a class="follow-genre" href="{% url 'genres.follow_genre' genre_id=genre.id %}">FOLLOW</a>
+            </div>
           </div>
-
-          <div class="col-md-1">
-            {% if request.user.is_authenticated %}
-              {% if request.user.profile %}
-                {% if genre in request.user.profile.following_genres.all %}
-                  <a href="{% url 'genres.unfollow_genre' genre_id=genre.id %}">Unfollow!</a>
-                {% else %}
-                  <a href="{% url 'genres.follow_genre' genre_id=genre.id %}">Follow!</a>
-                {% endif %}
-              {% endif %}
-            {% endif %}
-          </div>
-        </div>
-      </p>
-    </li>
+        </li>
+      {% endif %}
     {% endfor %}
   </ul>
-  <a class="btn btn-info" href="{% url 'genres.new' %}">New Genre</a>
+  <center><a class="btn btn-info btn-lg" href="{% url 'genres.new' %}">NEW GENRE</a></center>
 {% endblock content %}

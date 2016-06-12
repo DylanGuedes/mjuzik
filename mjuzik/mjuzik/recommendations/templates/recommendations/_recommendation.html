@@ -24,9 +24,9 @@
               <a href="{% url 'recommendations.destroy' recommendation_id=recommendation.id %}" class="btn btn-info"><span class="glyphicon glyphicon-cog"></span></a>
           {% else %}
             {% if request.user.profile in recommendation.liked_by.all %}
-              <a href="{% url 'recommendations.downvote' recommendation_id=recommendation.id %}" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span></a>
+              <a href="{% url 'recommendations.downvote' recommendation_id=recommendation.id %}" class="btn btn-default downvote"><span class="glyphicon glyphicon-ok-sign"></span></a>
             {% else %}
-              <a href="{% url 'recommendations.upvote' recommendation_id=recommendation.id %}" class="btn btn-default"><span class="glyphicon glyphicon-ok-sign"></span></a>
+              <a href="{% url 'recommendations.upvote' recommendation_id=recommendation.id %}" class="btn btn-default upvote"><span class="glyphicon glyphicon-ok-sign"></span></a>
             {% endif %}
           {% endif %}
         </div>

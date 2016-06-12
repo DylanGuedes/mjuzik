@@ -21,6 +21,7 @@ from mjuzik.authentication import views as authentication_views
 from mjuzik.recommendations import views as recommendation_views
 
 urlpatterns = [
+    url(r'^$', authentication_views.profile, name='home'),
     url(r'^follow_genre/(?P<genre_id>\d+)$', genre_views.follow_genre, name='genres.follow_genre'),
     url(r'^unfollow_genre/(?P<genre_id>\d+)$', genre_views.unfollow_genre, name='genres.unfollow_genre'),
     url(r'^recommendations/destroy/(?P<recommendation_id>\d+)$', recommendation_views.destroy, name='recommendations.destroy'),
@@ -39,6 +40,5 @@ urlpatterns = [
     url(r'^signup/$', authentication_views.signup, name='signup'),
     url(r'^signout/$', authentication_views.signout, name='signout'),
     url(r'^accounts/profile/$', authentication_views.profile, name='profile'),
-    url(r'^$', authentication_views.profile, name='home'),
     url('^markdown/', include('django_markdown.urls')),
 ]

@@ -5,7 +5,7 @@
 {% load bbcode_tags %}
 
 {% block content %}
-  <h1>Latest recommendations for you:</h1>
+  <h2 class="latest-recommendation-text">Latest recommendations for you...</h1>
   {% for recommendation in recommendations %}
     {% include 'recommendations/_recommendation.html' with recommendation=recommendation %}
   {% endfor %}

@@ -37,7 +37,8 @@ def signup(request):
             user.password = request.POST['password']
             c = User.objects.create_user(username=user.username, password=user.password, email=user.email)
             Profile(user=c).save()
-
+            log_user = authenticate(username=user.username, password=user.password)
+            login(request, log_user)
             return redirect('genres.index')
 
     return render(request, 'authentication/signup.html')
@@ -46,6 +47,8 @@ def signout(request):
     logout(request)
     return redirect('genres.index')
 
-@login_required(login_url='/login')
 def profile(request):
-    return render(request, 'authentication/profile.html')
+    if request.user.is_authenticated():
+        return render(request, 'authentication/profile.html')
+    else:
+        return render(request, 'authentication/welcome.html')
