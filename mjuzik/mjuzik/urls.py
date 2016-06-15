@@ -40,5 +40,6 @@ urlpatterns = [
     url(r'^signup/$', authentication_views.signup, name='signup'),
     url(r'^signout/$', authentication_views.signout, name='signout'),
     url(r'^accounts/profile/$', authentication_views.profile, name='profile'),
+    url(r'^profile/edit/$', authentication_views.edit_profile, name='profile.edit'),
     url('^markdown/', include('django_markdown.urls')),
 ]

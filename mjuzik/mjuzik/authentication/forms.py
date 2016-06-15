@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from mjuzik.authentication.models import Profile
 
 class SignupForm(forms.ModelForm):
     username = forms.CharField(max_length=30, required=True)
@@ -12,4 +13,10 @@ class SignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name')
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('avatar',)
 

@@ -14,7 +14,9 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-3">
-          {{ recommendation.created_by.user }}
+          {{ recommendation.created_by.user.username }}
+
+          <img src="{{recommendation.created_by.correct_avatar_path}}"/>
         </div>
         <div class="col-sm-9">
           <p>{{ recommendation.description.rendered}}</p>

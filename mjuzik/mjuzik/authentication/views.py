@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import SignupForm
+from .forms import SignupForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from mjuzik.authentication.models import Profile
 
@@ -28,7 +28,6 @@ def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            print("is valid")
             user = User()
             user.username = request.POST['username']
             user.email = request.POST['email']
@@ -52,3 +51,15 @@ def profile(request):
         return render(request, 'authentication/profile.html')
     else:
         return render(request, 'authentication/welcome.html')
+
+@login_required(login_url='/login')
+def edit_profile(request):
+    user = User.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        edit_form = EditProfileForm(request.POST, request.FILES, instance=user.profile)
+        edit_form.save()
+    else:
+        edit_form = EditProfileForm(instance=user)
+    context = {'form':edit_form}
+    return render(request, 'profile/edit.html', context)
+

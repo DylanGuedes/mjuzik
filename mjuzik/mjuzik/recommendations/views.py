@@ -30,9 +30,10 @@ def new_recommendation(request):
 @login_required(login_url='/login')
 def upvote(request, recommendation_id):
     recommendation = Recommendation.objects.get(id=recommendation_id)
-    recommendation.likes += 1
-    recommendation.liked_by.add(request.user.profile)
-    recommendation.save()
+    if not recommendation in request.user.profile.liked_recommendations.all():
+        recommendation.likes += 1
+        recommendation.liked_by.add(request.user.profile)
+        recommendation.save()
     return redirect('recommendations.index')
 
 @login_required(login_url='/login')
