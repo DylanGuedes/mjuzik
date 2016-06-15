@@ -9,19 +9,10 @@ def signin(request):
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-        print("username:")
-        print(username)
-        print("pass:")
-        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            print("NOT NULLL")
             login(request, user)
             return redirect('genres.index')
-        else:
-            print("eh null :(")
-    else:
-        print("NOT POST :(")
     return render(request, 'authentication/signin.html')
 
 def signup(request):
@@ -33,7 +24,7 @@ def signup(request):
             user.email = request.POST['email']
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
-            user.password = request.POST['password']
+            user.password = request.POST['password1']
             c = User.objects.create_user(username=user.username, password=user.password, email=user.email)
             Profile(user=c).save()
             log_user = authenticate(username=user.username, password=user.password)
