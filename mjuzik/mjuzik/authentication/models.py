@@ -6,9 +6,14 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to = 'mjuzik/static/img/', default = 'mjuzik/static/no-img.jpg')
 
     def correct_avatar_path(self):
-        wrong_path = self.avatar.url
-        if (wrong_path):
-            splitted_path = wrong_path.split("/")
-            return "/"+str(splitted_path[1])+"/"+str(splitted_path[2])+"/"+str(splitted_path[3])
-        else:
-            return ""
+        if self.avatar:
+            wrong_path = self.avatar.url
+            if (wrong_path):
+                splitted_path = wrong_path.split("/")
+                print("len:")
+                print(len(splitted_path))
+                if len(splitted_path) == 3:
+                    return "/"+str(splitted_path[1])+"/"+str(splitted_path[2])
+                else:
+                    return "/"+str(splitted_path[1])+"/"+str(splitted_path[2])+"/"+str(splitted_path[3])
+        return ""

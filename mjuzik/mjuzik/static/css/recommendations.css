@@ -39,3 +39,8 @@ a.panel-title.display-inline {
   border-radius: 0px;
   color: white;
 }
+
+.user-name {
+  font-size: 30px;
+  text-align: center;
+}
