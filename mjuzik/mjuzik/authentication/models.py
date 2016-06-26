@@ -10,8 +10,6 @@ class Profile(models.Model):
             wrong_path = self.avatar.url
             if (wrong_path):
                 splitted_path = wrong_path.split("/")
-                print("len:")
-                print(len(splitted_path))
                 if len(splitted_path) == 3:
                     return "/"+str(splitted_path[1])+"/"+str(splitted_path[2])
                 else:

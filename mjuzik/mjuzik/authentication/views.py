@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
-from mjuzik.authentication.models import Profile
+from mjuzik.authentication.models import Profile, NewsFeed
 
 def signin(request):
     if request.POST:
@@ -54,3 +54,14 @@ def edit_profile(request):
     context = {'form':edit_form}
     return render(request, 'profile/edit.html', context)
 
+@login_required(login_url='/login')
+def user_feeds(request):
+    context = {'feeds': request.user.profile.news_feeds.filter(readed=False)}
+    return render(request, 'profile/user_feeds.html', context)
+
+@login_required(login_url='/login')
+def read_feed(request, feed_id):
+    feed = NewsFeed.objects.get(pk=feed_id)
+    feed.readed = True
+    feed.save()
+    return user_feeds(request)

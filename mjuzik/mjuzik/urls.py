@@ -22,6 +22,8 @@ from mjuzik.recommendations import views as recommendation_views
 
 urlpatterns = [
     url(r'^$', authentication_views.profile, name='home'),
+    url(r'^user_feeds/$', authentication_views.user_feeds, name='user_feeds'),
+    url(r'^read_feed/(?P<feed_id>\d+)$', authentication_views.read_feed, name='read_feed'),
     url(r'^follow_genre/(?P<genre_id>\d+)$', genre_views.follow_genre, name='genres.follow_genre'),
     url(r'^unfollow_genre/(?P<genre_id>\d+)$', genre_views.unfollow_genre, name='genres.unfollow_genre'),
     url(r'^recommendations/destroy/(?P<recommendation_id>\d+)$', recommendation_views.destroy, name='recommendations.destroy'),

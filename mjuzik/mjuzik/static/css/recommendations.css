@@ -44,3 +44,9 @@ a.panel-title.display-inline {
   font-size: 30px;
   text-align: center;
 }
+
+.user-feeds-page h1 {
+  font-size: 40px;
+  color: #515171;
+  text-align: center;
+}

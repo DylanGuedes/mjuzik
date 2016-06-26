@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from mjuzik.recommendations.models import Recommendation
 from mjuzik.recommendations.forms import RecommendationForm
+from mjuzik.authentication.models import NewsFeed
 from mjuzik.genres.models import Genre
 from django.contrib.auth.decorators import login_required
 from django.core.signals import request_finished
