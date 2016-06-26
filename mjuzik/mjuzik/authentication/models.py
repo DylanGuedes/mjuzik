@@ -17,3 +17,10 @@ class Profile(models.Model):
                 else:
                     return "/"+str(splitted_path[1])+"/"+str(splitted_path[2])+"/"+str(splitted_path[3])
         return ""
+
+class NewsFeed(models.Model):
+    destination = models.ForeignKey(Profile, related_name='news_feeds')
+    description = models.CharField(max_length=300)
+    readed = models.BooleanField()
+    def __str__(self):
+        return self.description

@@ -3,6 +3,9 @@ from mjuzik.recommendations.models import Recommendation
 from mjuzik.recommendations.forms import RecommendationForm
 from mjuzik.genres.models import Genre
 from django.contrib.auth.decorators import login_required
+from django.core.signals import request_finished
+from django.dispatch import receiver
+from django.db.models.signals import m2m_changed
 
 @login_required(login_url='/login')
 def index(request):
@@ -64,3 +67,22 @@ def recommendation_detail(request, recommendation_id):
     context = { 'recommendation':recommendation }
     return render(request, 'recommendations/show.html', context=context)
 
+@receiver(request_finished)
+def send_feeds(sender, **kwargs):
+    print("Sending feed...")
+
+def send_new_recommendation_feed(sender, **kwargs):
+    if (kwargs.get("action")=='post_add'):
+        idx = kwargs.get("pk_set").pop()
+        idx_model = kwargs.get("model").objects.get(id=idx)
+        for person in idx_model.followed_by.all():
+            nf = NewsFeed()
+            nf.destination = person
+            nf.description = "A new recommendation for genre %s has been done!" % idx_model
+            nf.readed = False
+            nf.save()
+
+
+
+
+m2m_changed.connect(send_new_recommendation_feed, sender=Genre.recommendations.through)

@@ -33,3 +33,10 @@ In the project root folder, type:
 
  $ coverage-3.4 html
 ```
+
+## Required packages:
+- django-bootsrap-static
+- django-markdown
+- django-markup
+- django-precise-bbcode
+- django-fontawesome
