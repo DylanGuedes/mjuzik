@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="edit-profile-page">
+    <h1 class="font-fledgling-sb">{{request.user}}</h1>
+    <img src="{{request.user.profile.correct_avatar_path}}"/>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Save</button>
+  </form>
+
+{% endblock %}

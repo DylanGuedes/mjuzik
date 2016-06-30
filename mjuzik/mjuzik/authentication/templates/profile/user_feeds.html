@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="user-feeds-page">
+  <h1>Feeds</h1>
+  {% for feed in feeds.all %}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <p class="panel-title">Recommendation feed</p>
+    </div>
+    <div class="panel-body">
+      <p>{{feed.description}}<a class="btn btn-info float-right glyphicon glyphicon-remove" href="{% url 'read_feed' feed.id %}"></a></p>
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}
