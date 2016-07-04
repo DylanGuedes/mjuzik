@@ -7,11 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.signals import request_finished
 from django.dispatch import receiver
 from django.db.models.signals import m2m_changed
+from mjuzik import load_plugin, get_plugins, load_plugin_from_name
 
 @login_required(login_url='/login')
 def index(request):
+    plugin = load_plugin_from_name("uniquearray")
     genres_ids = request.user.profile.following_genres.all().values_list('id', flat=True)
     recommendations = Recommendation.objects.filter(genres__in=genres_ids).order_by('-created_at')
+    recommendations = plugin.run(recommendations)
     context = {'recommendations':recommendations}
     return render(request, 'recommendations/index.html', context)
 
@@ -70,7 +73,7 @@ def recommendation_detail(request, recommendation_id):
 
 @receiver(request_finished)
 def send_feeds(sender, **kwargs):
-    print("Sending feed...")
+    ...
 
 def send_new_recommendation_feed(sender, **kwargs):
     if (kwargs.get("action")=='post_add'):
@@ -82,8 +85,5 @@ def send_new_recommendation_feed(sender, **kwargs):
             nf.description = "A new recommendation for genre %s has been done!" % idx_model
             nf.readed = False
             nf.save()
-
-
-
 
 m2m_changed.connect(send_new_recommendation_feed, sender=Genre.recommendations.through)
