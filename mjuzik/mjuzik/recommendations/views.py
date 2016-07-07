@@ -8,7 +8,7 @@ from django.core.signals import request_finished
 from django.dispatch import receiver
 from django.db.models.signals import m2m_changed
 # from mjuzik import load_plugin, get_plugins, load_plugin_from_name
-from mjuzik.uniquearray import run as transform_into_unique
+from uniquearray import run as transform_into_unique
 
 @login_required(login_url='/login')
 def index(request):

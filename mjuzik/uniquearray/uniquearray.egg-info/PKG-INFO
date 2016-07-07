@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: uniquearray
+Version: 0.1
+Summary: Transform non-unique arrays into unique!
+Home-page: donthaveasite.org
+Author: Dylan Guedes
+Author-email: djmgguedes@gmail.com
+License: GPL v3
+Description: =====
+        UniqueArray
+        =====
+        
+        UniqueArray is a simple plugin that makes a non-unique collection into an unique one. The order of the items still the same.
+        
+        Quick start
+        -----------
+        
+        1. Add "uniquearray" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = [
+                ...
+                'uniquearray',
+            ]
+        
+        2. Import it, like this::
+            from uniquearray import run as unique_transform
+        
+         3. Profit
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: GPL v3
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

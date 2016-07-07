@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'uniquearray',
     'bootstrap',
     'fontawesome',
     'precise_bbcode',

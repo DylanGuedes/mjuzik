@@ -1,0 +1,8 @@
+MANIFEST.in
+README.rst
+setup.py
+uniquearray/__init__.py
+uniquearray.egg-info/PKG-INFO
+uniquearray.egg-info/SOURCES.txt
+uniquearray.egg-info/dependency_links.txt
+uniquearray.egg-info/top_level.txt

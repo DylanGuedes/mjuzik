@@ -16,3 +16,5 @@ Quick start
 
 2. Import it, like this::
     from uniquearray import run as unique_transform
+
+ 3. Profit
